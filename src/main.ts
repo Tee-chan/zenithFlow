@@ -49,8 +49,9 @@ async function bootstrap() {
   } catch (error) {
     console.error('Database connection failed:', error);
   }
-  await app.listen(port);
+  await app.listen(port, '0.0.0.0');
 
+  console.log(`Application is running on: ${await app.getUrl()}`);
   console.log(`Server running on http://localhost:${port}/api`);
   console.log(`Swagger: http://localhost:${port}/docs`);
 
