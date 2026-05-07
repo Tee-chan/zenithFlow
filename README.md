@@ -1,4 +1,4 @@
-<!-- # zenithFlow
+ # zenithFlow
 
 A high-performance B2B SaaS backend built with NestJS, Prisma, and PostgreSQL, implementing a multi-tenant shared-schema architecture. It is engineered to solve the complex problem of multi-tenant data isolation and state-dependent business workflows in an HR context. The system allows multiple companies (tenants) to manage their workforce, departments, and leave policies on a shared infrastructure with a "Zero-Trust" data access approach.
 
@@ -30,47 +30,41 @@ A high-performance B2B SaaS backend built with NestJS, Prisma, and PostgreSQL, i
 
 ---
 
-## Setup
+### Setup
+1. **Clone & Install**
+   ```bash
+   git clone https://github.com
+   cd zenith-flow
+   npm install
+   ```
 
-**1. Clone the repository**
-```bash
-git clone <your-repo-url>
-cd zenith-flow
-```
+2. **Environment Configuration**
+   ```bash
+   cp .env.example .env
+   # Ensure DATABASE_URL is set correctly for your terminal
+   ```
 
-**2. Install dependencies**
-```bash
-npm install
-```
+3. **Spin up Infrastructure**
+   ```bash
+   docker-compose up -d
+   ```
 
-**3. Configure environment variables**
-```bash
-cp .env.example .env
-```
+4. **Database Initialization (Prisma 7)**
+   ```bash
+   # Generate the client
+   npx prisma generate
+   
+   # Run migrations to sync the schema
+   npx prisma migrate dev --name init_schema
 
-Edit `.env`:
-```env
-PORT=3000
-DATABASE_URL=postgres://worknest:secret@localhost:5432/zenith_flow?schema=public"
-JWT_SECRET=your-super-secret-key-change-this
-JWT_EXPIRES_IN=7d
-```
+   #optional: seed initial data
+   npm run seed
+   ```
 
-**4. Spin up the environment**
-```bash
-docker-compose up -d
-```
-
-**5. Run migrations and seed**
-```bash
-npm prisma migrate dev
-npm run seed
-```
-
-**6. Start the application**
-```bash
-# Development
-npm run start:dev
+5. **Start the Application**
+   ```bash
+   npm run start:dev
+   ```
 
 # Production
 npm run build
@@ -99,8 +93,9 @@ visit http://localhost:3000/api to explore the interactive Swagger documentation
 |-------|--------|-----|
 | Framework | NestJS | Modular, TypeScript-first, DI built-in |
 | Language | TypeScript | Type safety, better DX |
-| Database | PostgreSQL | Relational data, ACID transactions, strong for multi-tenant |
-| ORM | TypeORM | First-class NestJS integration, migration support |
+| Database | PostgreSQL 16 | Relational data, Row-level seurity, ACID transactions, strong for multi-tenant |
+| ORM | Prisma 7 (with driver Adapters)| type-safe query extensions to automate tenant isolation |
+| Cache/Queue |Redis | Handle asynchronous background jobs(Queues), Distributed locking and Performance(caching). |
 | Auth | JWT + Passport | Stateless, scalable, embeds tenant context |
 | Docs | Swagger (@nestjs/swagger) | Auto-generated, interactive |
 | Containerisation | Docker + Compose | Reproducible dev environment |
@@ -114,4 +109,4 @@ Tenshi — [GitHub](https://github.com/Tee-chan) · [LinkedIn](https://linkedin.
 
 ## License
 
-MIT -->
+MIT
