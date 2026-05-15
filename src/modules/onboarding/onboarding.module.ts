@@ -1,9 +1,12 @@
+// onboarding.module.ts
 import { Module } from '@nestjs/common';
-import { OnboardingService } from './onboarding.service';
 import { OnboardingController } from './onboarding.controller';
+import { OnboardingService } from './onboarding.service';
+import { PrismaModule } from '../../prisma/prisma.module';
 
 @Module({
+  imports: [PrismaModule],
+  controllers: [OnboardingController],
   providers: [OnboardingService],
-  controllers: [OnboardingController]
 })
 export class OnboardingModule {}

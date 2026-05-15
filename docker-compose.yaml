@@ -1,8 +1,10 @@
+name: zenithflow
+
 services:
   postgres:
     image: postgres:15-alpine
     container_name: zenith-db
-    restart: always
+    restart: unless-stopped 
     environment:
       POSTGRES_USER: ${DB_USERNAME}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
@@ -25,7 +27,7 @@ services:
       context: .
       dockerfile: Dockerfile
       target: development   # Use the development stage else docker will use the production stage by default
-    restart: always
+    restart: unless-stopped 
     container_name: zenith-app
     env_file:
       - .env
@@ -69,7 +71,7 @@ services:
   pgadmin:
     image: dpage/pgadmin4
     container_name: zenith-pgadmin
-    restart: always
+    restart: unless-stopped
     environment:
       - PGADMIN_DEFAULT_EMAIL=${PGADMIN_EMAIL}
       - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_PASSWORD}
@@ -83,7 +85,7 @@ services:
   redis:
     image: redis:7-alpine
     container_name: zenith-redis
-    restart: always
+    restart: unless-stopped-
     ports:
       - "${REDIS_PORT}:6379"
     volumes:

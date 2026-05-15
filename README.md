@@ -33,7 +33,7 @@ A high-performance B2B SaaS backend built with NestJS, Prisma, and PostgreSQL, i
 ### Setup
 1. **Clone & Install**
    ```bash
-   git clone https://github.com
+   git clone https://github.com/
    cd zenith-flow
    npm install
    ```
@@ -64,7 +64,9 @@ A high-performance B2B SaaS backend built with NestJS, Prisma, and PostgreSQL, i
 5. **Start the Application**
    ```bash
    npm run start:dev
+  
    ```
+---
 
 # Production
 npm run build
